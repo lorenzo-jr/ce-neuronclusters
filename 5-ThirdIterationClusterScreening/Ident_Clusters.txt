@@ -1,0 +1,24 @@
+parent cluster: 8.0 n trials: 319
+Individual Ocurrence
+PVC	AVD	DB	RMG	NSML	AIB	PVQ	AIM	AVL	AIN	AVE	BDU	LUAR	RIM	RIR	RMD	SMD	M5	RID	RIS	SAB
+46	42	10	6	5	4	4	3	3	2	2	2	2	2	2	2	2	1	1	1	1
+Combined Ocurrence
+AVD	PVC	DB,PVC	DB	NSML	AIM	RMG	AIB	AIN,PVC	AVD,PVQ	LUAR	PVC,RMG	RIM	SMD	AIB,PVC,PVQ	AIB,RMG	AVD,PVC	AVE	AVE,RMD	AVL	AVL,DB,PVC	AVL,PVC	BDU	BDU,PVC	M5,RID,RIR,RIS	NSML,PVC	PVC,PVQ	RIR	RMD	SAB
+39	30	5	4	4	3	3	2	2	2	2	2	2	2	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 10.0 n trials: 325
+Individual Ocurrence
+BDU	PVR	RIS	ASK	LUAR	PVQ
+51	6	5	1	1	1
+Combined Ocurrence
+BDU	PVR	RIS	ASK	BDU,RIS	LUAR	PVQ
+50	6	4	1	1	1	1
+ 
+parent cluster: 10.1 n trials: 292
+Individual Ocurrence
+ALA	AWB	PVW
+137	1	1
+Combined Ocurrence
+ALA	ALA,AWB	ALA,PVW
+135	1	1
+ 

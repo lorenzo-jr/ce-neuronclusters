@@ -1,0 +1,65 @@
+cluster;dim;resol;Merge;OnlyExtract;details
+0;8;0.4;;0,1;extract 0.0 and 0.1
+1;8;0.1;;0,1;extract 1.0 and 1.1
+2;0;0;;0;extract the all cluster
+3;8;0.2;;0,1;extract 3.0 and 3.1
+4;12;0.15;;0,1;extract 4.0 and 4.1
+5;18;0.2;;0,1;extract 5.0 and 5.1
+6;0;0;;0;extract the all cluster
+7;0;0;;0;extract the all cluster
+8;18;0.5;;0,1,2,3;extract 8.0, 8.1, 8.2, 8.3
+9;-1;-1;;;
+10;8;0.3;;0,1,2;extract 10.0, 10.1, 10.2
+11;18;0.9;0,1,2;3,4;extract 11.3, 11.4 should we merge 11.0, 11.1, 11.2?
+12;8;0.1;;0,1;extract 12.0, 12.1
+13;8;0.1;;0;extract the all cluster
+14;8;0.1;;0;extract the all cluster
+15;-1;-1;;;
+16;8;0.1;;0,1;extract 16.0 and 16.1 (to merge after)
+17;8;0.1;;0,1;extract 17.0 and 17.1
+18;-1;-1;;;
+19;25;0.5;;0,1;extract 19.0 and 19.1
+20;8;0.1;;0;extract the all cluster
+21;-1;-1;;;
+22;15;1.2;2,3;0,1,4;15.2, 15.3 merge , extract  15.1, 15.4 and 15.0
+23;-1;-1;;;
+24;-1;-1;;;
+25;-1;-1;;;
+26;23;1;;0,1,2;extract 26.0, 26.1, 26.2
+27;8;1.7;0,3;1,2;merge 27.0 and 27.3, extract 27.1, 27.2. (27.4 has 6 cells, no point).
+28;8;1.2;0,2,3,4;1;extract 1 merge 0,2,3,4 (added) 
+29;13;0.4;;0,1;extract 29.0, 29.1
+30;8;0.1;;0;extract the all cluster (all seems RIA, ok?)
+31;8;0.1;;0;extract the all cluster
+32;-1;-1;;;
+33;7;0.1;;0;extract the all cluster
+34;7;0.1;;0;extract the all cluster
+35;7;0.1;;0,1;extract 35.0 and 35.1
+36;7;0.1;;0;extract the all cluster
+37;5;0.4;;0,1;extract 37.0, 37.1
+38;6;0.1;;0;extract the all cluster
+39;6;0.1;;0;extract the all cluster
+40;6;0.1;;0;extract the all cluster
+41;6;0.1;;0;extract the all cluster
+42;10;0.9;;0,1;extract 42.0 and 42.1 (added) 
+43;0;0;;0;extract the all cluster
+44;5;0.1;;0;extract the all cluster
+45;5;0.1;;0;extract the all cluster
+46;0;0;;0;extract the all cluster
+47;-1;-1;;;
+48;0;0;;0;extract the all cluster
+49;5;0.1;;0;extract the all cluster
+50;0;0;;0;extract the all cluster
+51;4;0.3;;0,1;extract 51.0 and 51.1
+52;4;0.1;;0;extract the all cluster
+53;4;0.1;;0;extract the all cluster
+54;0;0;;0;extract the all cluster
+55;4;0.1;;0;extract the all cluster
+56;0;0;;0;extract the all cluster
+57;3;0.6;;0;extract the all cluster (merge 57.0 & 57.1)
+58;-1;-1;;;
+59;3;0.1;;0;extract the all cluster
+60;3;0.1;;0;extract the all cluster
+61;3;0.1;;0;extract the all cluster
+62;3;0.1;;0;extract the all cluster
+63;3;0.1;;0;extract the all cluster

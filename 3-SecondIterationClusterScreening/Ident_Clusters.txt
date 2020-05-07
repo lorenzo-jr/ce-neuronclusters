@@ -1,0 +1,512 @@
+parent cluster: 0 n trials: 330
+Individual Ocurrence
+VA	DA	AVM	ALM	RIM	AVB	AS	RMD	SAB	VB	VC	AIN	AVF	AVG	CAN	DB	I3	I6	LUAR	RIR	RMH	SDQ
+35	19	5	4	4	3	2	2	2	2	2	1	1	1	1	1	1	1	1	1	1	1
+Combined Ocurrence
+VA	DA	ALM,DA	AS	DA,VA	AIN	ALM,AVF,RIM	ALM,DA,VA	AVB	AVB,DA	AVB,RMH	AVG,AVM	AVM	AVM,DA,VA	AVM,DA,VB	AVM,LUAR,SAB,VC	CAN,DA,VA	DA,SAB	DB	I3,VA	I6,VA	RIM	RIM,RMD,VA,VC	RIM,VA	RIR,VA	RMD	SDQ,VB
+25	9	2	2	2	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 1 n trials: 330
+Individual Ocurrence
+URB	AIB	AIY	URY	RIG	SIA
+296	4	3	3	2	2
+Combined Ocurrence
+URB	AIB,RIG,URB	AIB,URB	AIY,URB	SIA,URB	URB,URY	AIY,URB,URY
+285	2	2	2	2	2	1
+ 
+parent cluster: 2 n trials: 330
+Individual Ocurrence
+DA	DB	RIR	SDQ	AS	I3	MCL	RMD	SIA
+79	4	3	2	1	1	1	1	1
+Combined Ocurrence
+DA	DB	RIR	SDQ	AS	I3	MCL	RMD	SIA
+79	4	3	2	1	1	1	1	1
+ 
+parent cluster: 3 n trials: 330
+Individual Ocurrence
+DD	DVB	VD	RME	AVF	I2	PVC	RIB	SIA
+67	4	4	3	1	1	1	1	1
+Combined Ocurrence
+DD	DD,DVB	DD,RME	DD,VD	AVF,I2,VD	DD,PVC	DD,RIB	DD,SIA	VD
+55	4	3	2	1	1	1	1	1
+ 
+parent cluster: 4 n trials: 330
+Individual Ocurrence
+PVM	PLM	AVM	ALM	AWC
+82	24	6	1	1
+Combined Ocurrence
+PVM	PLM	PLM,PVM	AVM,PVM	ALM,PVM	AVM,AWC,PVM
+69	18	6	5	1	1
+ 
+parent cluster: 5 n trials: 330
+Individual Ocurrence
+SIB	AIY	RMD	AIZ	AVF	VC	ALN	DD	M3	RIR	SIA	URB
+181	6	4	3	3	3	1	1	1	1	1	1
+Combined Ocurrence
+SIB	RMD	AIY	AVF	SIB,VC	AIY,AIZ	AIY,AIZ,URB	AIY,ALN	AIY,SIB	AIZ	AVF,SIB	DD,RMD	M3	RIR	SIA	VC
+177	3	2	2	2	1	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 6 n trials: 330
+Individual Ocurrence
+DVB
+1
+Combined Ocurrence
+DVB
+1
+ 
+parent cluster: 7 n trials: 330
+Individual Ocurrence
+SMB	SDQ	SAA	AVJ	AVH	M4	PHA
+59	32	10	5	4	1	1
+Combined Ocurrence
+SMB	SDQ	SDQ,SMB	SAA	AVH,SDQ,SMB	AVJ	SAA,SMB	AVJ,SMB	AVH	M4,SDQ,SMB	PHA,SDQ
+37	14	13	7	3	3	3	2	1	1	1
+ 
+parent cluster: 8 n trials: 330
+Individual Ocurrence
+RID	PVPL	AVD	PVC	RMG	PLN	M1	AIB	AVA	BDU	RIB	RIR
+293	225	43	9	9	3	2	1	1	1	1	1
+Combined Ocurrence
+PVPL,RID	RID	AVD,PVPL,RID	AVD	PVC,PVPL,RID	PVPL,RID,RMG	AVD,PVPL	AVD,RID	PLN,PVPL,RID	PVPL	AIB,PVPL,RID	AVA,PVPL,RID	BDU,PVPL,RID	M1,PVC,PVPL,RID	M1,PVPL,RID	PVPL,RIB,RID,RMG	RID,RIR
+170	71	23	12	8	8	5	3	3	2	1	1	1	1	1	1	1
+ 
+parent cluster: 9 n trials: 330
+Individual Ocurrence
+
+
+Combined Ocurrence
+
+
+ 
+parent cluster: 10 n trials: 330
+Individual Ocurrence
+ALA	AVJ	BDU	PVR	DD	LUAR	PLM
+169	54	11	10	2	1	1
+Combined Ocurrence
+ALA	ALA,AVJ	ALA,BDU	PVR	ALA,AVJ,PVR	ALA,PVR	ALA,BDU,PVR	ALA,DD	ALA,LUAR	ALA,PLM	DD
+99	52	10	5	2	2	1	1	1	1	1
+ 
+parent cluster: 11 n trials: 330
+Individual Ocurrence
+SMD	RIM	SAA	AIN	AVA	SIA	PVC	URY	AS	AVF	M4	PVQ	RIV	RMH	AIY	ALN	AVB	AVE	AVJ	BAG	BDU	DVA	MI	NSML	RIC	RIG	RMG	VC
+166	161	21	9	5	4	3	3	2	2	2	2	2	2	1	1	1	1	1	1	1	1	1	1	1	1	1	1
+Combined Ocurrence
+RIM,SMD	SMD	RIM	RIM,SAA,SMD	AIN,RIM	RIM,SMD,URY	AIN,ALN,M4,RIM	AIN,AVA,M4,PVQ,RIM	AIN,AVA,RIM,SIA	AIN,AVF,NSML,RIM,SMD	AIN,BAG,RIM	AIN,RIM,RMH	AIN,RIM,SMD	AIY,RIM,SMD	AS,RIM	AS,RIM,RMG,SAA,SMD	AVA,PVC,RIM,SIA	AVA,PVC,RIM,SIA,SMD	AVA,RIM,SMD	AVB,RIM,SMD	AVE,RIM,SMD	AVF,RIM,SAA,SMD	AVJ,PVQ,RIM,SMD,VC	BDU,RIM,SAA,SMD	DVA,RIM,RIV,SAA,SMD	MI,RIM	PVC,RIM,SIA,SMD	RIC,RIM	RIG,RIM,SAA	RIM,RIV,SMD	RIM,RMH,SMD	RIM,SAA,SMD,URY	SAA,SMD
+96	37	21	14	2	2	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 12 n trials: 330
+Individual Ocurrence
+AVA	RIG	AVG	SIB
+36	15	1	1
+Combined Ocurrence
+AVA	AVA,RIG	AVA,AVG,RIG	AVA,RIG,SIB
+21	13	1	1
+ 
+parent cluster: 13 n trials: 330
+Individual Ocurrence
+CAN
+85
+Combined Ocurrence
+CAN
+85
+ 
+parent cluster: 14 n trials: 330
+Individual Ocurrence
+AVK
+20
+Combined Ocurrence
+AVK
+20
+ 
+parent cluster: 15 n trials: 330
+Individual Ocurrence
+
+
+Combined Ocurrence
+
+
+ 
+parent cluster: 16 n trials: 330
+Individual Ocurrence
+FLP
+13
+Combined Ocurrence
+FLP
+13
+ 
+parent cluster: 17 n trials: 330
+Individual Ocurrence
+RIH	SMB	DD	ALA	AS	I3	DA	PVPL	VD
+318	45	27	9	5	3	1	1	1
+Combined Ocurrence
+RIH	RIH,SMB	DD,RIH	ALA,RIH	AS,RIH	I3,RIH	ALA,RIH,SMB	ALA,SMB	DA,RIH	PVPL,RIH,SMB	RIH,VD
+231	41	27	6	5	3	2	1	1	1	1
+ 
+parent cluster: 18 n trials: 330
+Individual Ocurrence
+ALM	RID
+9	2
+Combined Ocurrence
+ALM	RID
+9	2
+ 
+parent cluster: 19 n trials: 329
+Individual Ocurrence
+M5	I4	NSML	M2	M4
+132	89	39	19	5
+Combined Ocurrence
+M5	I4,M5	I4	M5,NSML	I4,M2	NSML	M2	I4,NSML	M2,M5	M4,NSML	I4,M2,NSML	I4,M4,M5,NSML	I4,M2,M5,NSML	I4,M5,NSML	M2,M5,NSML
+62	43	30	19	7	7	5	3	3	3	2	2	1	1	1
+ 
+parent cluster: 20 n trials: 323
+Individual Ocurrence
+ALN	PLN	SAA	RME	M5
+39	14	13	3	2
+Combined Ocurrence
+ALN	SAA	PLN	ALN,PLN	RME	M5	ALN,SAA
+33	12	9	5	3	2	1
+ 
+parent cluster: 21 n trials: 330
+Individual Ocurrence
+
+
+Combined Ocurrence
+
+
+ 
+parent cluster: 22 n trials: 317
+Individual Ocurrence
+OLQ	CEPD	ADE	IL1	AQR.PQR	ALN	AVA	ASJ	AWB	NSML	OLL
+211	51	24	22	8	4	2	1	1	1	1
+Combined Ocurrence
+OLQ	CEPD,OLQ	IL1,OLQ	ADE,CEPD,OLQ	ADE	AQR.PQR,OLQ	ADE,OLQ	ADE,CEPD	ADE,IL1,OLQ	ALN,CEPD,OLQ	ALN,IL1,OLQ	ADE,AVA,CEPD,IL1	ADE,AVA,IL1	AQR.PQR,NSML	AQR.PQR,OLL	ASJ,OLQ	AWB,OLQ	CEPD	CEPD,IL1,OLQ
+134	35	15	9	6	6	3	2	2	2	2	1	1	1	1	1	1	1	1
+ 
+parent cluster: 23 n trials: 317
+Individual Ocurrence
+CAN
+155
+Combined Ocurrence
+CAN
+155
+ 
+parent cluster: 24 n trials: 317
+Individual Ocurrence
+
+
+Combined Ocurrence
+
+
+ 
+parent cluster: 25 n trials: 319
+Individual Ocurrence
+ALM	ALN	IL1	PLM	RIC
+34	1	1	1	1
+Combined Ocurrence
+ALM	ALN	IL1	PLM	RIC
+34	1	1	1	1
+ 
+parent cluster: 26 n trials: 313
+Individual Ocurrence
+AFD	AWC	ASK	AWB
+166	154	2	1
+Combined Ocurrence
+AFD,AWC	AFD	AFD,ASK,AWC	AFD,AWB,AWC
+151	12	2	1
+ 
+parent cluster: 27 n trials: 313
+Individual Ocurrence
+RME	URY	I1	SMD	ALA	AVL	PVW	RMD	AS	DD	M4	PLM	RIF	SAB	SIB	URA	URB
+169	11	5	4	3	2	2	2	1	1	1	1	1	1	1	1	1
+Combined Ocurrence
+RME	RME,URY	I1,RME	ALA,RME	AVL,RME	RMD,RME,SMD	ALA,I1,RME	AS,PLM,RME,SMD	DD,RME	M4,RME	PVW,RME,SIB,URY	PVW,RME,URA,URY	RIF,SMD	RME,SAB	RME,URB
+142	9	4	2	2	2	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 28 n trials: 314
+Individual Ocurrence
+ASH	PVT	ASER	PHB	CEPD	NSML	ADE	ADL	ASI	PHA
+15	14	5	3	2	2	1	1	1	1
+Combined Ocurrence
+PVT	ASH	ASER	ASH,PVT	ASH,NSML	ASH,PHB	CEPD	ADE	ADL,ASH	ASER,ASH	ASER,PVT	ASH,PHA	ASI	PHB
+10	5	3	3	2	2	2	1	1	1	1	1	1	1
+ 
+parent cluster: 29 n trials: 313
+Individual Ocurrence
+AIB	AIZ	NSML	PVQ	AIM	AIY	AVA	RIB	SAA	URY	AS	AVF	I1	RID	RIS
+137	59	9	4	3	3	2	2	2	2	1	1	1	1	1
+Combined Ocurrence
+AIB	AIB,AIZ	AIB,NSML	AIZ	AIB,AIZ,PVQ	AIB,AIY,AIZ	AIB,AIM,AIZ	AIB,AIZ,AS	AIB,AIZ,AVA,RID	AIB,AIZ,AVA,SAA	AIB,AIZ,AVF	AIB,AIZ,RIB	AIB,AIZ,SAA	AIB,I1	AIB,NSML,RIS	AIB,RIB	AIB,URY	AIM,NSML,URY	AIZ,NSML
+74	38	6	5	4	3	2	1	1	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 30 n trials: 314
+Individual Ocurrence
+RIA	URY	BAG	OLL	VD	AIZ	I1	I3	PVC	RIC
+238	8	4	2	2	1	1	1	1	1
+Combined Ocurrence
+RIA	RIA,URY	BAG,RIA	OLL,RIA	RIA,URY,VD	AIZ,RIA	I1,RIA	I3,RIA	PVC,RIA	RIA,RIC
+219	6	4	2	2	1	1	1	1	1
+ 
+parent cluster: 31 n trials: 313
+Individual Ocurrence
+ADL	AQR.PQR	ASEL	ASER	ADF	ASK	ASH	ASJ	AWB	AFD	M1	RIC
+55	14	10	10	3	3	2	2	2	1	1	1
+Combined Ocurrence
+ADL	ASEL	AQR.PQR	AQR.PQR,ASER	ASER	AQR.PQR,ASK	ASJ	ADF	ADF,ADL	ADF,ADL,ASH	ADL,AQR.PQR	AFD	AQR.PQR,ASER,ASK	ASEL,ASER	ASER,AWB	ASH	AWB	M1	RIC
+52	9	6	4	3	2	2	1	1	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 32 n trials: 309
+Individual Ocurrence
+RME	ALM	AIB	ASI	I2	PVT
+10	7	1	1	1	1
+Combined Ocurrence
+RME	ALM	AIB	ASI	I2	PVT
+10	7	1	1	1	1
+ 
+parent cluster: 33 n trials: 339
+Individual Ocurrence
+AVL	AVA	M2	LUAR	VA	AFD	ASG	AVG	M1	PVT	AIA	M5
+93	23	17	15	7	4	4	4	2	2	1	1
+Combined Ocurrence
+AVL	AVA,AVL	AVL,M2	AVA	M2	LUAR	VA	AVL,LUAR	AFD	AVA,AVG	AVA,LUAR	PVT	AFD,AVL	AIA	ASG	ASG,AVA	ASG,AVA,AVL,M1	ASG,AVA,LUAR	AVA,AVL,LUAR	AVG,AVL	AVG,M2	AVL,LUAR,M2	AVL,M1	AVL,VA	LUAR,VA	M5
+64	9	9	6	6	5	5	4	3	2	2	2	1	1	1	1	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 34 n trials: 301
+Individual Ocurrence
+ASG	AWB	ASK	AFD	OLQ	ADE	ADL	ASI	AWA	AWC	ADF	FLP	I4	IL2
+187	8	7	6	4	3	3	3	2	2	1	1	1	1
+Combined Ocurrence
+ASG	ASG,ASK	ASG,AWB	ASG,ASI	ASG,OLQ	AWB	ADE,AFD,ASG	ADL,ASG,ASK	AFD,ASG	ASG,AWA	ADE,AFD	ADF,ASG	ADL,ASG	AFD	ASG,ASK,OLQ	ASG,AWB,IL2	ASG,AWC	ASG,FLP	ASG,I4	AWC
+158	4	4	3	3	3	2	2	2	2	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 35 n trials: 304
+Individual Ocurrence
+AIM	AIB	AVK	RIF	M1	AIY	AS	PVQ	PVT	RIM	DVA	RMD
+212	11	8	8	5	3	3	2	2	2	1	1
+Combined Ocurrence
+AIM	AIB	AVK,RIF	M1	PVQ	RIF	AIB,AIM	AIB,AIY	AIB,AVK,RIF	AIM,M1	AIM,RIM	AIY	AIY,AS	AS	AS,RMD	AVK	AVK,PVT	AVK,PVT,RIF	DVA	RIM
+209	8	4	4	2	2	1	1	1	1	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 36 n trials: 301
+Individual Ocurrence
+AQR.PQR	AUA	ADA	URX	ASG	PVM	BAG	OLL
+49	16	9	9	2	2	1	1
+Combined Ocurrence
+AQR.PQR	AUA	ADA	URX	AQR.PQR,AUA	ADA,AQR.PQR	AQR.PQR,URX	ADA,AQR.PQR,OLL	AQR.PQR,AUA,URX	ASG	ASG,BAG	AUA,PVM	PVM
+39	10	6	6	4	2	2	1	1	1	1	1	1
+ 
+parent cluster: 37 n trials: 332
+Individual Ocurrence
+AS	PHA	ASK	VB	AWC	AVM	BDU	DD	PVPL
+209	6	5	5	3	2	1	1	1
+Combined Ocurrence
+AS	AS,ASK	VB	AS,PHA	AS,VB	AVM	PHA	AS,AWC	AS,AWC,PHA	AWC,PHA	BDU	DD	PVPL
+198	5	3	2	2	2	2	1	1	1	1	1	1
+ 
+parent cluster: 38 n trials: 332
+Individual Ocurrence
+ASJ	ASK
+74	4
+Combined Ocurrence
+ASJ	ASJ,ASK
+70	4
+ 
+parent cluster: 39 n trials: 297
+Individual Ocurrence
+RMG
+93
+Combined Ocurrence
+RMG
+93
+ 
+parent cluster: 40 n trials: 310
+Individual Ocurrence
+ASK	AWB	ASI	AWC	M2	BAG	ADF	ASEL	ASJ	AWA	PVT
+241	5	4	4	4	2	1	1	1	1	1
+Combined Ocurrence
+ASK	ASK,M2	ASI	ASK,AWB	AWB	ADF,ASI,ASK	ASEL	ASI,ASK,AWC	ASJ,ASK	ASK,AWA	ASK,AWC	AWB,BAG,M2	AWC	AWC,PVT	BAG
+231	3	2	2	2	1	1	1	1	1	1	1	1	1	1
+ 
+parent cluster: 41 n trials: 268
+Individual Ocurrence
+DVA	I2	RME
+77	3	2
+Combined Ocurrence
+DVA	DVA,I2	DVA,I2,RME	DVA,RME
+73	2	1	1
+ 
+parent cluster: 42 n trials: 270
+Individual Ocurrence
+AVG	ALA	AVB
+47	9	6
+Combined Ocurrence
+AVG	ALA	AVB	ALA,AVB
+47	8	5	1
+ 
+parent cluster: 43 n trials: 269
+Individual Ocurrence
+PLN	URB	AIY	VA
+6	3	1	1
+Combined Ocurrence
+PLN	URB	AIY	VA
+6	3	1	1
+ 
+parent cluster: 44 n trials: 297
+Individual Ocurrence
+BAG
+68
+Combined Ocurrence
+BAG
+68
+ 
+parent cluster: 45 n trials: 264
+Individual Ocurrence
+AIN	RIR	BDU
+175	2	1
+Combined Ocurrence
+AIN	RIR	BDU
+175	2	1
+ 
+parent cluster: 46 n trials: 265
+Individual Ocurrence
+IL2	AWB	URA
+186	2	1
+Combined Ocurrence
+IL2	AWB,IL2	IL2,URA
+183	2	1
+ 
+parent cluster: 47 n trials: 263
+Individual Ocurrence
+DA
+8
+Combined Ocurrence
+DA
+8
+ 
+parent cluster: 48 n trials: 260
+Individual Ocurrence
+PVQ	AFD	SIA	PDB	ASI	BDU	URY	AS	AVD	MCL	RIM	VD
+19	4	4	3	2	2	2	1	1	1	1	1
+Combined Ocurrence
+PVQ	AFD	SIA	PDB	ASI	BDU	URY	AS	AVD	MCL	RIM	VD
+19	4	4	3	2	2	2	1	1	1	1	1
+ 
+parent cluster: 49 n trials: 261
+Individual Ocurrence
+AWA	FLP
+89	1
+Combined Ocurrence
+AWA	AWA,FLP
+88	1
+ 
+parent cluster: 50 n trials: 259
+Individual Ocurrence
+ADF	FLP	ADE	ASJ	AQR.PQR	AWC	PHB
+7	4	2	2	1	1	1
+Combined Ocurrence
+ADF	FLP	ASJ	ADE	ADE,AQR.PQR	AWC	PHB
+7	4	2	1	1	1	1
+ 
+parent cluster: 51 n trials: 302
+Individual Ocurrence
+ASEL
+180
+Combined Ocurrence
+ASEL
+180
+ 
+parent cluster: 52 n trials: 288
+Individual Ocurrence
+AVG	AVD
+181	1
+Combined Ocurrence
+AVG	AVD,AVG
+180	1
+ 
+parent cluster: 53 n trials: 256
+Individual Ocurrence
+RIC	ASH	I2	IL2
+194	3	1	1
+Combined Ocurrence
+RIC	ASH,RIC	I2,RIC	IL2
+190	3	1	1
+ 
+parent cluster: 54 n trials: 246
+Individual Ocurrence
+AIN	AIA	AIY	AQR.PQR	AVG	CAN	DB
+21	7	1	1	1	1	1
+Combined Ocurrence
+AIN	AIA	AIN,CAN	AIY,AQR.PQR	AVG	DB
+20	7	1	1	1	1
+ 
+parent cluster: 55 n trials: 244
+Individual Ocurrence
+PVQ	AS	I1
+114	1	1
+Combined Ocurrence
+PVQ	AS,PVQ	I1,PVQ
+112	1	1
+ 
+parent cluster: 56 n trials: 223
+Individual Ocurrence
+ASH	VC	AVH	I1	RMH	URA
+2	2	1	1	1	1
+Combined Ocurrence
+ASH	VC	AVH	I1	RMH	URA
+2	2	1	1	1	1
+ 
+parent cluster: 57 n trials: 206
+Individual Ocurrence
+PVT	AVG
+34	2
+Combined Ocurrence
+PVT	AVG
+34	2
+ 
+parent cluster: 58 n trials: 199
+Individual Ocurrence
+
+
+Combined Ocurrence
+
+
+ 
+parent cluster: 59 n trials: 171
+Individual Ocurrence
+RIS
+111
+Combined Ocurrence
+RIS
+111
+ 
+parent cluster: 60 n trials: 151
+Individual Ocurrence
+M1
+94
+Combined Ocurrence
+M1
+94
+ 
+parent cluster: 61 n trials: 179
+Individual Ocurrence
+ASI	ADF	ASJ	OLQ
+5	1	1	1
+Combined Ocurrence
+ASI	ADF	ASJ	OLQ
+5	1	1	1
+ 
+parent cluster: 62 n trials: 181
+Individual Ocurrence
+ASER
+130
+Combined Ocurrence
+ASER
+130
+ 
+parent cluster: 63 n trials: 158
+Individual Ocurrence
+I5	M4	RMG
+135	1	1
+Combined Ocurrence
+I5	I5,M4	I5,RMG
+133	1	1
+ 

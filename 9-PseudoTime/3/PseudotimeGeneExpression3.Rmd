@@ -1,0 +1,209 @@
+---
+title: "Pseudotime for clusters 3.0 and 3.1"
+author: "Ramiro Lorenzo"
+date: "April 8, 2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Load library
+```{r library,results='hide',message=FALSE}
+library(monocle3,verbose = FALSE)
+library(dplyr,verbose = FALSE)
+```
+
+## Read the data
+```{r Data}
+## Loads a sparse matrix RawCountsPseudotime
+load("RawCountsPseudotime.rda")
+dim(RawCountsPseudotime)
+```
+
+##Load cluster data
+```{r}
+## Loads a factor variabele ClusterPseudotime containing cluster identities
+load("ClusterPseudotime.rda")
+## Change the name of variable to remind
+DataClusters <- ClusterPseudotime
+
+table(DataClusters)
+length(DataClusters)
+```
+
+##Convert DataClusters to a matrix format for input to Monocle
+```{r}
+DataCluster.ID <- matrix(as.numeric(levels(DataClusters))[DataClusters], ncol = 1)
+rownames(DataCluster.ID) <- names(DataClusters)
+colnames(DataCluster.ID) <- "Cluster.IDs"
+DataCluster.ID[1:10,]
+```
+
+##Generate matrix of gene short names for Monocle
+```{r}
+geneNames <- matrix(rownames(RawCountsPseudotime), ncol = 1)
+rownames(geneNames) <- rownames(RawCountsPseudotime)
+colnames(geneNames) <- "gene_short_name"
+head(geneNames)
+```
+
+##Initiate Monocle object
+```{r}
+cds <- new_cell_data_set(expression_data = RawCountsPseudotime,
+                         cell_metadata = DataCluster.ID,
+                         gene_metadata = geneNames)
+
+
+cds <- cds[,names(ClusterPseudotime[ClusterPseudotime %in% c("3.0","3.1")])]
+
+
+colData(cds)
+
+## Column Cluster.IDs contains the original DataCluster IDs
+colData(cds)$Cluster.IDs <- factor(colData(cds)$Cluster.IDs)
+colData(cds)
+```
+
+## Step 1: Normalize and pre-process the data
+```{r}
+cds <- preprocess_cds(cds, num_dim = 100)
+plot_pc_variance_explained(cds)
+cds <- preprocess_cds(cds, num_dim = 20)
+```
+
+##Step 2: Reduce the dimensions using UMAP
+```{r}
+cds <- reduce_dimension(cds,umap.min_dist = 0.1,cores = 8)
+plot_cells(cds, color_cells_by = "Cluster.IDs", group_label_size = 4, cell_size = 0.5)
+```
+##Step 3: Cluster the cells
+```{r}
+# cds = cluster_cells(cds, resolution=0.02)
+cds = cluster_cells(cds, resolution=0.01)
+plot_cells(cds, cell_size = 0.5)
+
+```
+
+##Step 4: Learn a graph and order cells
+```{r}
+cds <- learn_graph(cds)
+```
+```{r}
+## With Shiny
+# cds <- order_cells(cds)
+# #
+# save(file = "cdsRoots.rda", cds) #Save object state after selection of roots
+
+## Without Shiny
+load("cdsRoots.rda") #Load object
+
+print(cds@principal_graph_aux$UMAP$root_pr_nodes)
+```
+```{r}
+plot_cells(cds)
+```
+##Plot the pseudotime graph
+```{r}
+plot_cells(cds,
+           color_cells_by = "Cluster.IDs",
+           label_groups_by_cluster=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE)
+```
+##Plot the pseudotime graph
+```{r}
+plot_cells(cds,
+           color_cells_by = "pseudotime",
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE, 
+           graph_label_size=1.5)
+```
+##Plot the pseudotime graph without trajectory
+```{r}
+plot_cells(cds,
+           color_cells_by = "pseudotime",
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE, 
+           graph_label_size=1.5,
+           show_trajectory_graph = FALSE)
+```
+
+## Correlation Analysis
+### Cluster 3
+```{r,results='hide'}
+cluster3.cellNames <- rownames(pData(cds))[pData(cds)$Cluster.IDs %in% c(3, 3.1)]
+
+cds_3 <- cds[,cluster3.cellNames]
+
+cds3_pg <- graph_test(cds_3, neighbor_graph="principal_graph", cores=4, verbose = F)
+cds3_genes <- cds3_pg %>% 
+  filter(q_value < 0.05) %>% 
+  arrange(morans_I) %>% 
+  select(gene_short_name)
+```
+
+```{r}
+cds3_genes$gene_short_name
+```
+
+```{r}
+# Plot a few genes
+plot_cells(cds_3, genes= c("ttr-39","ser-2", "oig-1", "hbl-1"),
+           show_trajectory_graph=FALSE,
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           cell_size = .5
+          )
+
+```
+```{r}
+# Plot a few genes
+plot_cells(cds_3, genes= c("lin-46", "unc-30", "lin-14","unc-25"),
+           show_trajectory_graph=FALSE,
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           cell_size = .5
+          )
+```
+```{r}
+# Plot a few genes
+plot_cells(cds_3, genes= c( "unc-47","oig-1", "flp-13", "unc-25"),
+           show_trajectory_graph=FALSE,
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           cell_size = .5
+          )
+```
+```{r}
+# Plot a few genes
+plot_cells(cds_3, genes= c("unc-47", "kcc-2", "unc-30", "lin-14"),
+           show_trajectory_graph=FALSE,
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           cell_size = .5
+          )
+```
+```{r}
+# Plot a few genes
+plot_cells(cds_3, genes= c("lin-17","ser-2", "oig-1", "flp-13"),
+           show_trajectory_graph=FALSE,
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           cell_size = .5
+          )
+```
+```{r}
+
+cds_3_lineage_cds <- cds_3[rowData(cds_3)$gene_short_name %in% c("unc-30", "unc-47", "kcc-2", "oig-1", "flp-13"),]
+plot_genes_in_pseudotime(cds_3_lineage_cds,
+                         min_expr=0.05)
+```
+
+

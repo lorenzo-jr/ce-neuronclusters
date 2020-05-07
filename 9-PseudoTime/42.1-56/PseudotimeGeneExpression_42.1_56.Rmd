@@ -1,0 +1,242 @@
+---
+title: "Pseudotime for clusters 42.1 and 56"
+author: "Ramiro Lorenzo"
+date: "April 8, 2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+## Load library
+```{r library,results='hide',message=FALSE}
+library(monocle3,verbose = FALSE)
+library(dplyr,verbose = FALSE)
+```
+
+## Read the data
+```{r Data}
+## Loads a sparse matrix RawCountsPseudotime
+load("../RawCountsPseudotime.rda")
+dim(RawCountsPseudotime)
+```
+
+##Load cluster data
+```{r}
+## Loads a factor variabele ClusterPseudotime containing cluster identities
+load("../ClusterPseudotime.rda")
+## Change the name of variable to remind
+DataClusters <- ClusterPseudotime
+
+table(DataClusters)
+length(DataClusters)
+```
+
+##Convert DataClusters to a matrix format for input to Monocle
+```{r}
+DataCluster.ID <- matrix(as.character(levels(DataClusters))[DataClusters], ncol = 1)
+rownames(DataCluster.ID) <- names(DataClusters)
+colnames(DataCluster.ID) <- "Cluster.IDs"
+DataCluster.ID[1:10,]
+```
+
+##Generate matrix of gene short names for Monocle
+```{r}
+geneNames <- matrix(rownames(RawCountsPseudotime), ncol = 1)
+rownames(geneNames) <- rownames(RawCountsPseudotime)
+colnames(geneNames) <- "gene_short_name"
+head(geneNames)
+```
+
+##Initiate Monocle object
+```{r}
+cds <- new_cell_data_set(expression_data = RawCountsPseudotime,
+                         cell_metadata = DataCluster.ID,
+                         gene_metadata = geneNames)
+
+cds <- cds[,names(ClusterPseudotime[ClusterPseudotime %in% c(
+                                                                # "0.0",
+                                                                # "0.1",
+                                                                # "1.0",
+                                                                # "1.1",
+                                                                # "2.0",
+                                                                # "3.0",
+                                                                # "3.1",
+                                                                # "4.0",
+                                                                # "4.1",
+                                                                # "16.0",
+                                                                # "16.1",
+                                                                # "17.0",
+                                                                # "17.1",
+                                                                # "8.0.0",
+                                                                # "8.0.1",
+                                                                # "8.1",
+                                                                # "8.2",
+                                                                # "8.3",
+                                                                # "10.0.0",
+                                                                # "10.0.1_4",
+                                                                # "10.0.2_3",
+                                                                # "10.0.5",
+                                                                # "10.1.0",
+                                                                # "10.1.1",
+                                                                # "10.2",
+                                                                # "33.0",
+                                                                # "42.0",
+                                                                "42.1",
+                                                                "56.0"
+                                                                )])] #all data for trajectories
+
+
+
+colData(cds)
+
+## Column Cluster.IDs contains the original DataCluster IDs
+colData(cds)$Cluster.IDs <- factor(colData(cds)$Cluster.IDs)
+colData(cds)
+```
+
+## Step 1: Normalize and pre-process the data
+```{r}
+cds <- preprocess_cds(cds, num_dim = 40)
+plot_pc_variance_explained(cds)
+cds <- preprocess_cds(cds, num_dim = 10)
+```
+
+##Step 2: Reduce the dimensions using UMAP
+```{r}
+cds <- reduce_dimension(cds,umap.min_dist = 0.1,cores = 8)
+plot_cells(cds, color_cells_by = "Cluster.IDs", group_label_size = 4, cell_size = 0.5,show_trajectory_graph = T)
+```
+
+##Step 3: Cluster the cells
+```{r}
+# cds = cluster_cells(cds, resolution=0.02)
+cds = cluster_cells(cds, resolution=0.2)
+plot_cells(cds, cell_size = 0.5)
+
+```
+
+##Step 4: Learn a graph and order cells
+```{r}
+cds <- learn_graph(cds)
+plot_cells(cds, cell_size = 0.5)
+```
+```{r}
+# ## With Shiny
+# cds <- order_cells(cds)
+# #
+# save(file = "cdsRoots.rda", cds) #Save object state after selection of roots to avoid changes in furure runs
+
+## Without Shiny
+load("cdsRoots.rda") #Load object
+
+print(cds@principal_graph_aux$UMAP$root_pr_nodes)
+```
+```{r}
+plot_cells(cds)
+```
+
+##Plot the pseudotime graph
+```{r}
+plot_cells(cds,
+           color_cells_by = "Cluster.IDs",
+           label_groups_by_cluster=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE)
+```
+
+##Plot the pseudotime graph
+```{r}
+plot_cells(cds,
+           color_cells_by = "pseudotime",
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE, 
+           graph_label_size=1.5)
+```
+
+##Plot the pseudotime graph without trajectory
+```{r}
+plot_cells(cds,
+           color_cells_by = "pseudotime",
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE, 
+           graph_label_size=1.5,
+           show_trajectory_graph = FALSE)
+```
+
+## Correlation Analysis
+```{r,results='hide'}
+cds_pg <- graph_test(cds, neighbor_graph="principal_graph", cores=4, verbose = F)
+
+cds_genes <- cds_pg %>% 
+  filter(q_value < 0.05) %>% 
+  arrange(desc(morans_I)) %>% 
+  select(gene_short_name)
+```
+
+```{r}
+cds_genes$gene_short_name
+```
+```{r}
+# Plot a few genes
+list_genes <- unique(c("mpz-1","nrx-1", "unc-5", "unc-33","ina-1", "sel-10","mps-3","alr-1", "nhr-25", "tlp-1", "psa-3","lin-44","pdf-1", "vab-15","egl-20", "egl-27", "ceh-6", "egl-5", "jmjd-3.1", "che-14", "egl-26", "ajm-1","lin-26", "egl-26", "sem-4", "sox-2", "pdf-1", "ceh-9" , "mab-9","set-2", "cog-1", "exp-1", "tag-80", "madd-4","ina-1", "sel-10", "alr-1", "nhr-25", "tlp-1", "mps-3","cki-1","unc-3", "cho-1", "cha-1", "unc-17","sad-1", "syd-2", "unc-104", "unc-10", "egl-3", "egl-21"))
+
+nplots <- 9
+x <- seq_along(list_genes)
+toplot <- split(list_genes, ceiling(x/nplots))
+fillplot <- nplots-length(toplot[[length(toplot)]])
+toplot[[length(toplot)]] <- c(toplot[[length(toplot)]],toplot[[1]][1:fillplot])
+
+
+for (x in toplot) {
+  print(plot_cells(cds, genes= x,
+             show_trajectory_graph=FALSE,
+             label_cell_groups=FALSE,
+             label_leaves=FALSE,
+             cell_size = .4
+            ))
+}
+
+```
+
+##Pseudotemporal Expression Pattern
+###Diferentially expressed
+```{r}
+nplots <- 4
+x <- seq_along(as.character(cds_genes$gene_short_name))
+toplot <- split(as.character(cds_genes$gene_short_name), ceiling(x/nplots))
+fillplot <- nplots-length(toplot[[length(toplot)]])
+toplot[[length(toplot)]] <- c(toplot[[length(toplot)]],toplot[[1]][1:fillplot])
+
+
+
+for (x in toplot) {
+  cds_lineage_cds <- cds[rowData(cds)$gene_short_name %in% x,]
+  print(plot_genes_in_pseudotime(cds_lineage_cds,
+                         min_expr=0.05))
+}
+
+
+```
+
+### Selected genes
+```{r}
+
+nplots <- 4
+x <- seq_along(list_genes)
+toplot <- split(list_genes, ceiling(x/nplots))
+fillplot <- nplots-length(toplot[[length(toplot)]])
+toplot[[length(toplot)]] <- c(toplot[[length(toplot)]],toplot[[1]][1:fillplot])
+
+
+
+for (x in toplot) {
+  cds_lineage_cds <- cds[rowData(cds)$gene_short_name %in% x,]
+  print(plot_genes_in_pseudotime(cds_lineage_cds,
+                         min_expr=0.05))
+}
+
+
+```

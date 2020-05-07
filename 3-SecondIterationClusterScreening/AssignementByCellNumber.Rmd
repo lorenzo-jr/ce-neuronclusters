@@ -1,0 +1,306 @@
+---
+title: "ID Assignment and Cell Number"
+author: "Jaun Ramiro Lorenzo"
+date: "April 26, 2020"
+output: pdf_document
+---
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+require(knitr)
+# Set so that long lines in R will be wrapped:
+opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE)
+```
+
+
+```{r libraries}
+library(ggplot2)
+library(sjmisc)
+library(readr)
+library(plyr)
+library(readxl)
+
+#+++++++++++++++++++++++++
+# Function to calculate the mean and the standard deviation
+  # for each group
+#+++++++++++++++++++++++++
+# data : a data frame
+# varname : the name of a column containing the variable
+  #to be summariezed
+# groupnames : vector of column names to be used as
+  # grouping variables
+data_summary <- function(data, varname, groupnames){
+  require(plyr)
+  summary_func <- function(x, col){
+    c(mean = mean(x[[col]], na.rm=TRUE),
+      sd = sd(x[[col]], na.rm=TRUE))
+  }
+  data_sum<-ddply(data, groupnames, .fun=summary_func,
+                  varname)
+  data_sum <- rename(data_sum, c("mean" = varname))
+ return(data_sum)
+}
+```
+
+
+```{r load Dataset}
+AverageExpression92.4 <- read_delim("../7-FinalPlotAndClusteringMarkers/AverageExpression92.4.csv", ",", escape_double = FALSE, trim_ws = TRUE)
+ClusteringfinalAssignment <- read_excel("../Datasets/ClusteringfinalAssignment.xlsx")
+cured_brain_atlas_PL_and_OH_CircularOtherMarkers <- read_delim("../Datasets/cured brain atlas PL and OH-CircularOtherMarkers.csv", 
+    ";", escape_double = FALSE, trim_ws = TRUE)
+# load("../2-PlotBestFirstClustering/CeNeurons_Seurat_object_1st.rda")#seurat object
+load("IterationData.rda")
+IterationData <- unique(IterationData)
+
+Clusters <- list("13" = c("CAN"), "14" = c("AVK"), "16" = c("FLP"), "30" = c("RIA"), "31" = c("ADL"), "34" = c("ASG"), "38" = c("ASJ"),"39" = c("RMG"), "40" = c("ASK"), "41" = c("DVA"), "44"= c("BAG"), "45"= c("AIN"), "46" = c("IL2"), "49" = c("AWA"), "52" = c("AVG"), "53" = c("RIC"), "55" = c("PVQ"), "59" = c("RIS"), "60" = c("M1"), "62" = c("ASER"), "63" = c("I5"))
+
+
+
+IterationData <- IterationData[IterationData$parent_cluster %in% names(Clusters),]
+IterationData <- cbind(IterationData, Good_assignment = NA)
+IterationData <- cbind(IterationData, Perfect_assignment = NA)
+
+sum_stats <- data.frame()
+sum_stats_perfect <- data.frame()
+#Check assignment
+for (Cluster in names(Clusters)) {
+  
+  IterationData[IterationData$parent_cluster == Cluster,]$Good_assignment <- unlist(
+    lapply(IterationData[IterationData$parent_cluster == Cluster,]$cluster_id,
+           FUN = str_contains,pattern = Clusters[[Cluster]], 
+           logic = "AND"))
+  
+  IterationData[IterationData$parent_cluster == Cluster,]$Perfect_assignment <- IterationData[IterationData$parent_cluster == Cluster,]$n_ident == length(Clusters[[Cluster]]) & IterationData[IterationData$parent_cluster == Cluster,]$Good_assignment
+  
+  length(Clusters[[Cluster]])
+  
+  ClusterData <- IterationData[IterationData$parent_cluster == Cluster,]
+  
+  #save statistics
+  sum_stats <- rbind(sum_stats , 
+                     data.frame(
+                       c(Cluster = Cluster,
+                         Good_assignment = T,
+                         as.list(summary(ClusterData[ClusterData$Good_assignment == T,
+                                                     c("n_cells")]))
+                         )))
+  
+  sum_stats <- rbind(sum_stats , 
+                     data.frame(
+                       c(Cluster = Cluster,
+                         Good_assignment = F,
+                         as.list(summary(ClusterData[ClusterData$Good_assignment == F,
+                                                     c("n_cells")]))
+                         )))
+  
+  sum_stats_perfect <- rbind(sum_stats_perfect , 
+                     data.frame(
+                       c(Cluster = Cluster,
+                         Perfect_assignment = T,
+                         as.list(summary(ClusterData[ClusterData$Perfect_assignment == T,
+                                                     c("n_cells")]))
+                         )))
+  
+    sum_stats_perfect <- rbind(sum_stats_perfect , 
+                     data.frame(
+                       c(Cluster = Cluster,
+                         Perfect_assignment = F,
+                         as.list(summary(ClusterData[ClusterData$Perfect_assignment == F,
+                                                     c("n_cells")]))
+                         )))
+  
+}
+
+
+#Assign Ranges
+max(IterationData$n_cells)
+min(IterationData$n_cells)
+
+IterationData <- cbind(IterationData, Cell_range = NA)
+irange <- 5
+i <- 0
+ranges <- c()
+for (cell_range in 0:((50-irange) / irange) * irange) {
+  IterationData$Cell_range[IterationData$n_cells > cell_range & IterationData$n_cells <= cell_range+irange] <- paste(cell_range+1,cell_range+irange, sep = "-")
+  ranges <- c(ranges,paste(cell_range+1,cell_range+irange, sep = "-"))
+} 
+  IterationData$Cell_range[IterationData$n_cells > 50] <- "51-..."
+  ranges <- c(ranges,"51-...")
+
+
+Data_ranges <- data.frame()
+Data_ranges_clusters <- data.frame()
+for (r in ranges) {
+  Good_assignement = sum(IterationData$Cell_range == r & IterationData$Good_assignment == T)
+  Bad_assignement = sum(IterationData$Cell_range == r & IterationData$Good_assignment == F)
+  P_Good_assignement = sum(IterationData$Cell_range == r & IterationData$Perfect_assignment == T)
+  P_Bad_assignement = sum(IterationData$Cell_range == r & IterationData$Perfect_assignment == F)
+  
+  Data_ranges <- rbind(Data_ranges,
+                       data.frame(cell_range = r,
+                                  Good_assignement,
+                                  Bad_assignement,
+                                  Percentage = Good_assignement/(Good_assignement+Bad_assignement),
+                                  P_Good_assignement,
+                                  P_Bad_assignement,
+                                  P_Percentage = P_Good_assignement/(P_Good_assignement+P_Bad_assignement)
+                         
+                       )
+                       )
+  
+  
+  for (cluster in names(Clusters)) {
+      Good_assignement = sum(IterationData$Cell_range == r & IterationData$Good_assignment == T & IterationData$parent_cluster == cluster)
+      Bad_assignement = sum(IterationData$Cell_range == r & IterationData$Good_assignment == F &  IterationData$parent_cluster == cluster)
+      P_Good_assignement = sum(IterationData$Cell_range == r & IterationData$Perfect_assignment == T & IterationData$parent_cluster == cluster)
+      P_Bad_assignement = sum(IterationData$Cell_range == r & IterationData$Perfect_assignment == F & IterationData$parent_cluster == cluster)
+      
+      Data_ranges_clusters <- rbind(Data_ranges_clusters,
+                           data.frame(cell_range = r,
+                                      assign = Good_assignement,
+                                      Percentage = Good_assignement / (Good_assignement+Bad_assignement),
+                                      P_assign = P_Good_assignement,
+                                      P_Percentage = P_Good_assignement / (P_Good_assignement+P_Bad_assignement),
+                                      Cluster = paste(cluster,Clusters[cluster], sep = "_"),
+                                      Good_assign = T
+      
+                         
+                       )
+                       )
+
+      Data_ranges_clusters <- rbind(Data_ranges_clusters,
+                           data.frame(cell_range = r,
+                                      assign = Bad_assignement,
+                                      Percentage = Bad_assignement / (Good_assignement+Bad_assignement),
+                                      P_assign = P_Bad_assignement,
+                                      P_Percentage = P_Bad_assignement / (P_Good_assignement+P_Bad_assignement),
+                                      Cluster = paste(cluster,Clusters[cluster], sep = "_"),
+                                      Good_assign = F))
+    
+    
+    
+  }
+}
+Data_ranges
+
+
+```
+
+
+# Summary statistics (Mean values for all clusters) - Iteration data from second screening where small clusters are obtained by increasing resolution
+## Number of cells for sub-clusters when the automatically assigned identities include the expected ones
+```{r}
+#-Properly assigned:
+apply(sum_stats[sum_stats$Good_assignment==T,c("Min.", "X1st.Qu.", "Median", "Mean", "X3rd.Qu.", "Max.")], 2, mean)
+#-Badly assigned:
+apply(sum_stats[sum_stats$Good_assignment==F,c("Min.", "X1st.Qu.", "Median", "Mean", "X3rd.Qu.", "Max.")], 2, mean)
+
+```
+
+## Number of cells for sub-clusters when the automatically assigned identities match exactly the expected
+```{r}
+#Two clusters do not contain perfect matches
+sum_stats_perfect <- sum_stats_perfect[sum_stats_perfect$Cluster != "43",]
+sum_stats_perfect <- sum_stats_perfect[sum_stats_perfect$Cluster != "48",]
+#-Properly assigned:
+apply(sum_stats_perfect[sum_stats_perfect$Perfect_assignment==T,c("Min.", "X1st.Qu.", "Median", "Mean", "X3rd.Qu.", "Max.")], 2, mean)
+#-Badly assigned:
+apply(sum_stats_perfect[sum_stats_perfect$Perfect_assignment==F,c("Min.", "X1st.Qu.", "Median", "Mean", "X3rd.Qu.", "Max.")], 2, mean)
+```
+
+
+# Boxplots
+## Number of cells for sub-clusters when the automatically assigned identities include the expected ones
+```{r fig.width=20}
+
+# Box plot
+p <- ggplot(IterationData, aes(x=parent_cluster, y=n_cells, fill = Good_assignment)) + ylim(0,150) + 
+    theme(text = element_text(size=20)) +
+  geom_boxplot()
+p
+
+# Box plot
+
+p <- ggplot(Data_ranges_clusters, aes(x=cell_range, y=Percentage, fill = Good_assign)) +
+    theme(text = element_text(size=20)) +
+  geom_boxplot()
+p
+
+```
+
+# Percenage of good assign per cell range
+```{r}
+
+dfsumamry <- data_summary(Data_ranges_clusters, varname="Percentage", 
+                    groupnames=c("cell_range","Good_assign"))
+
+# Line plot with good assignement
+ggplot(dfsumamry, aes(x=cell_range, y=Percentage, group=Good_assign, color=Good_assign)) + 
+    geom_errorbar(aes(ymin=Percentage-sd, ymax=Percentage+sd), width=.1) +
+    geom_line() + geom_point()
+
+dfsumamry <- data_summary(Data_ranges_clusters, varname="P_Percentage", 
+                    groupnames=c("cell_range","Good_assign"))
+
+# Line plot with perfect assignement
+ggplot(dfsumamry, aes(x=cell_range, y=P_Percentage, group=Good_assign, color=Good_assign)) + 
+    geom_errorbar(aes(ymin=P_Percentage-sd, ymax=P_Percentage+sd), width=.1) +
+    geom_line() + geom_point()
+
+```
+
+
+## Number of cells for sub-clusters when automatically assigned identities match exactly the expected 
+```{r fig.width=20}
+
+# Box plot
+p <- ggplot(IterationData, aes(x=parent_cluster, y=n_cells, fill = Perfect_assignment)) + ylim(0,150) + 
+    theme(text = element_text(size=20)) +
+  geom_boxplot()
+p
+
+```
+
+#Statistics for Clusters automaticaly assigned in the first round (Final data from clustering parameters PCs = 92 and Resol = 4)
+
+## Gene atlas summary
+```{r}
+cured_brain_atlas_PL_and_OH_CircularOtherMarkers <- cured_brain_atlas_PL_and_OH_CircularOtherMarkers[,2:length(cured_brain_atlas_PL_and_OH_CircularOtherMarkers)]
+nGene <- apply(cured_brain_atlas_PL_and_OH_CircularOtherMarkers[,unlist(Clusters)], 2, sum)
+names(nGene) <- paste(unlist(names(Clusters)),names(nGene),sep = "_")
+print("Total atlas genes per neuron class")
+nGene
+
+specificGenes <- apply(cured_brain_atlas_PL_and_OH_CircularOtherMarkers, 1, sum) == 1
+cured_brain_atlas_specific <- cured_brain_atlas_PL_and_OH_CircularOtherMarkers[specificGenes,]
+nGene <- apply(cured_brain_atlas_specific[,unlist(Clusters)], 2, sum)
+names(nGene) <- paste(unlist(names(Clusters)),names(nGene),sep = "_")
+print("Specific atlas genes (only expresed in one neuron)")
+nGene
+
+```
+
+# Total genes detected vs cluster size (N_cells)
+```{r}
+ClusteringfinalAssignment <- as.data.frame(ClusteringfinalAssignment)
+rownames(ClusteringfinalAssignment) <- ClusteringfinalAssignment$Cluster
+totalGenes <- apply(AverageExpression92.4>0, 2, sum)
+totalGenes <- totalGenes[3:length(totalGenes)-1]
+
+dataGeneCount <- data.frame(N_cells = ClusteringfinalAssignment[names(totalGenes),"N Cells"],Total_gene_count = totalGenes)
+
+ClusteringfinalAssignment[names(totalGenes),"N Cells"]
+ggplot(dataGeneCount, aes(N_cells,Total_gene_count))+
+  geom_point() +
+  geom_smooth(method = "lm",formula=y~log(x))
+
+#log(N_cells)
+ggplot(dataGeneCount, aes(log(N_cells),Total_gene_count))+
+  geom_point() +
+  geom_smooth(method = "lm")
+
+
+
+cor(log(dataGeneCount$N_cells),dataGeneCount$Total_gene_count)
+
+```
+

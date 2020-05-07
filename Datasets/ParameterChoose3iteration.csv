@@ -1,0 +1,4 @@
+cluster;dim;resol;Merge;OnlyExtract;details
+8.0;8;0.3;;0,1; extract
+10.0;10;1.6;;0,1,2,3,4,5; need especial merge after
+10.1;4;0.4;;0,1; extract
