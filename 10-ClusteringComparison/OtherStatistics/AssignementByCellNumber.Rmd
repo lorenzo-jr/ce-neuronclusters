@@ -45,12 +45,12 @@ data_summary <- function(data, varname, groupnames){
 
 
 ```{r load Dataset}
-AverageExpression92.4 <- read_delim("../7-FinalPlotAndClusteringMarkers/AverageExpression92.4.csv", ",", escape_double = FALSE, trim_ws = TRUE)
-ClusteringfinalAssignment <- read_excel("../Datasets/ClusteringfinalAssignment.xlsx")
-cured_brain_atlas_PL_and_OH_CircularOtherMarkers <- read_delim("../Datasets/cured brain atlas PL and OH-CircularOtherMarkers.csv", 
+AverageExpression92.4 <- read_delim("../../7-FinalPlotAndClusteringMarkers/AverageExpression92.4.csv", ",", escape_double = FALSE, trim_ws = TRUE)
+ClusteringfinalAssignment <- read_excel("../../Datasets/ClusteringfinalAssignment.xlsx")
+cured_brain_atlas_PL_and_OH_CircularOtherMarkers <- read_delim("../../Datasets/cured brain atlas PL and OH-CircularOtherMarkers.csv", 
     ";", escape_double = FALSE, trim_ws = TRUE)
 # load("../2-PlotBestFirstClustering/CeNeurons_Seurat_object_1st.rda")#seurat object
-load("IterationData.rda")
+load("../../3-SecondIterationClusterScreening/IterationData.rda")
 IterationData <- unique(IterationData)
 
 Clusters <- list("13" = c("CAN"), "14" = c("AVK"), "16" = c("FLP"), "30" = c("RIA"), "31" = c("ADL"), "34" = c("ASG"), "38" = c("ASJ"),"39" = c("RMG"), "40" = c("ASK"), "41" = c("DVA"), "44"= c("BAG"), "45"= c("AIN"), "46" = c("IL2"), "49" = c("AWA"), "52" = c("AVG"), "53" = c("RIC"), "55" = c("PVQ"), "59" = c("RIS"), "60" = c("M1"), "62" = c("ASER"), "63" = c("I5"))
