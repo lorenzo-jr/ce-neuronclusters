@@ -1,7 +1,5 @@
 load("IterationData.rda")
 IterationData=unique(IterationData)
-write.csv(IterationData,"IterationData.csv")
-
 
 oneIdClusters=NA
 duplicatedIds=NA

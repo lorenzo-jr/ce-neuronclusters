@@ -141,5 +141,7 @@ for (parentcluster in ClusToTest[order(as.numeric(ClusToTest))]) {
   }
 
 ### SAVE RESULTS
+IterationData=unique(IterationData)
+write.csv(IterationData,"IterationData.csv")
 save(IterationData, file="IterationData.rda")
 

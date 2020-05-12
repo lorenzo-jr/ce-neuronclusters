@@ -22,7 +22,7 @@ dim(RawCountsPseudotime)
 
 ##Load cluster data
 ```{r}
-## Loads a factor variabele ClusterPseudotime containing cluster identities
+## Loads a factor variable ClusterPseudotime containing cluster identities
 load("../ClusterPseudotime.rda")
 ## Change the name of variable to remind
 DataClusters <- ClusterPseudotime
@@ -230,7 +230,7 @@ for (x in toplot) {
 ```
 
 ##Pseudotemporal Expression Pattern
-###Diferentially expressed cds_sub0.1
+###Differentially expressed cds_sub0.1
 ```{r}
 nplots <- 4
 x <- seq_along(as.character(cds_genes$gene_short_name[1:40]))
@@ -250,7 +250,7 @@ for (x in toplot) {
 
 ```
 
-###Diferentially expressed cds_sub2.0
+###Differentially expressed dividing by 2 branches (cds_sub2.0)
 ```{r}
 nplots <- 4
 x <- seq_along(as.character(cds_genes$gene_short_name[1:40]))

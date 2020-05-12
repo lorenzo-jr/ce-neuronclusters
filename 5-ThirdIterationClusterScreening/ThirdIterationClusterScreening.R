@@ -2,7 +2,6 @@ PCs=92
 Resols=4
 
 source("InitializationScript.R")
-# source("functions.R")
 
 load("../4-PlotBestSecondSubClustering/CustomIterationClusters.rda")
 CustomIterationClusters=CustomIterationClusters[!CustomIterationClusters=="27.NA"]# to discard 27.4: only 6 cells
@@ -155,8 +154,9 @@ for (parentcluster in ThirdIterationClusters) {
 
 
 ### SAVE RESULTS
+IterationData=unique(IterationData)
 save(IterationData,file="IterationData.rda")
-
+write.csv(IterationData,"IterationData.csv")
 
 
 

@@ -65,7 +65,7 @@ MergeAndExtract <- ParameterChoose[!ParameterChoose$dim == -1,c(1,4,5,6)]
 
 FinalSubclusterIDs = cbind(SubclusterIDs, finalClusters=NA)
 
-#use selected parameters to assign clusters
+#Manual Curation of clusters: use selected parameters to assign clusters from ParameterChoose3iteration.csv
 for (cluster in MergeAndExtract$cluster) {
   if (MergeAndExtract[MergeAndExtract$cluster==cluster,]$OnlyExtract == "0") {
     FinalSubclusterIDs[FinalSubclusterIDs$ParentCluster == cluster,"finalClusters"] = "0"
@@ -106,11 +106,11 @@ for (cluster in MergeAndExtract$cluster) {
 #merged names
 FinalIDs <- paste(FinalSubclusterIDs[,2],FinalSubclusterIDs[,6], sep = ".")
 
-# Merge 10.0.1 (AVH?) with 10.0.4
+# Manual Curation of clusters: Merge 10.0.1 (AVH?) with 10.0.4
 FinalIDs[FinalIDs == "10.0.1"] <- "10.0.1_4" 
 FinalIDs[FinalIDs == "10.0.4"] <- "10.0.1_4" 
 
-# Merge 10.0.2 (BDU?) with 10.0.3
+# Manual Curation of clusters: Merge 10.0.2 (BDU?) with 10.0.3
 FinalIDs[FinalIDs == "10.0.2"] <- "10.0.2_3" 
 FinalIDs[FinalIDs == "10.0.3"] <- "10.0.2_3" 
 
@@ -128,9 +128,9 @@ CustomIterationClustersThird <- combine$clusterID
 names(CustomIterationClustersThird) <- row.names(combine)
 
 ClusterPseudotime <- CustomIterationClustersThird #for psudotime
-#merge 16.0 and 16.1 both are FLP
+#Manual Curation of clusters: merge 16.0 and 16.1 both are FLP
 CustomIterationClustersThird[CustomIterationClustersThird == "16.1"] <- "16.0"
-#merge 0 and 2
+#Manual Curation of clusters: merge 0 and 2
 levels(CustomIterationClustersThird)[1]<-"0_2"
 CustomIterationClustersThird[CustomIterationClustersThird=="0.1"] <- "0_2"
 CustomIterationClustersThird[CustomIterationClustersThird=="2.0"] <- "0_2"

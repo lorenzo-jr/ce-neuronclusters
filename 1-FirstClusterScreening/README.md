@@ -1,4 +1,10 @@
-Output files from 1-FirstClusteringScreening.R:
+Script files:
+
+- InitializationScript.R: used to load library and functions and to initialize seurat object
+
+- FirstClusterScreening.R: this script iterates by changing the numbers of principal components  (between 40 and 100)  and resolution parameters (from 1 to 8) used for Louvain clustering. Finally generates tree tables with summary results for each condition (output files bellow).
+
+Output files from FirstClusteringScreening.R:
 
 - duplicated.csv: Table indicating number of clusters sharing same identities 
 
