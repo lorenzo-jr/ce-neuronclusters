@@ -2,7 +2,7 @@ Script files:
 
 - InitializationScript.R: used to load library and functions and to initialize seurat object
 
-- PlotBestFirstClustering.R: this script is used for piloting in tSNE space using best clustering parameters found  in previous step (folder 1-FirstClusteringScreening; PCs = 92; Resolution = 4). Also plots in tSNE spaces highlighting some neuronal markers are produced at this step.
+- PlotBestFirstClustering.R: this script is used for plotting in tSNE space using best clustering parameters found  in previous step (folder 1-FirstClusteringScreening; PCs = 92; Resolution = 4). Also plots in tSNE spaces highlighting some neuronal markers are produced at this step.
 
 
 Output files from PlotBestFirstClustering.R:

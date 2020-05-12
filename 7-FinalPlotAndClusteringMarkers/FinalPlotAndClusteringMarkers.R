@@ -1,6 +1,7 @@
 library(Seurat)
 library(ggplot2)
 library(readr)
+library(readxl)
 
 #try t.test
 tryTtest <- function (sample,alternative = "greater") {
@@ -60,7 +61,7 @@ for (geneID in Atlas_simbol$ID) {
   }
 }
 
-load("CustomIterationClusters3dit.rda")
+load("../6-PlotBestThirdSubClustering/CustomIterationClusters3dit.rda")
 
 #Refining last assignements
 CustomIterationClusters = CustomIterationClustersThird[!CustomIterationClustersThird == "27.NA"]# to discard 27.4: only 6 cells
@@ -73,7 +74,7 @@ rownames(dfFinalAssignement)<-dfFinalAssignement$cells
 dfFinalAssignement[names(CustomIterationClusters),"cluster"]=as.character(CustomIterationClusters)
 
 #Removing doublets previously analyzed
-load("../DoubletAnalysis/doublets.rda")
+load("../8-DoubletAnalysis/doublets.rda")
 FinalAssignement <- factor(dfFinalAssignement$cluster)
 names(FinalAssignement) <- dfFinalAssignement$cells
 
@@ -209,9 +210,21 @@ dev.off()
 # save(file="7-FinalPlotAndClusteringMarkers/CeNeurons_2st_seurat_clusters.rda",CeNeurons_2st_seurat_clusters)
 
 
-# Write final expression table
+
+# Create final expression table
 AverageExpression92.4second=AverageExpression(CeNeurons)
-write.csv(AverageExpression92.4second,file ="./AverageExpression92.4.csv")
+
+CLUSTER_ID <- read_excel("../Datasets/ClusteringfinalAssignment.xlsx")
+CLUSTER_ID <- as.data.frame(CLUSTER_ID)
+rownames(CLUSTER_ID) <- CLUSTER_ID$Cluster
+clusterIDnumber <- CLUSTER_ID$Cluster[CLUSTER_ID$Cluster %in% colnames(AverageExpression92.4second$RNA)]
+
+# Add neuron identities to cluster name
+AverageExpression92.4second$RNA <- AverageExpression92.4second$RNA[,clusterIDnumber]
+colnames(AverageExpression92.4second$RNA) <- paste(CLUSTER_ID[clusterIDnumber,]$Cluster,CLUSTER_ID[clusterIDnumber,]$`Manual assignment to Neuron classes`)
+
+# Write final expression table
+write.csv(AverageExpression92.4second$RNA,file ="./AverageExpression92.4.csv")
 
 # Write final markers table
 AllMarkers92.4second=FindAllMarkers(CeNeurons)
@@ -219,7 +232,6 @@ write.csv(AllMarkers92.4second,file ="./AllMarkers92.4.csv")
 
 ####################################################
 # Add anotation data to Markers table
-library(readxl)
 CLUSTER_ID <- read_excel("../Datasets/ClusteringfinalAssignment.xlsx")
 
 rownames(id_simbol)<-id_simbol$symbol
@@ -272,4 +284,5 @@ for (cluster in levels(CeNeurons$seurat_clusters)) {
   }
 }
 write.csv(data,"./AverageRNAcount.csv")
+file.remove("./AllMarkers92.4.csv")
 

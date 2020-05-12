@@ -127,6 +127,7 @@ combine <- rbind(combine,clusterID)
 CustomIterationClustersThird <- combine$clusterID
 names(CustomIterationClustersThird) <- row.names(combine)
 
+#Save cluster information and rna count for pseudotime analysis
 ClusterPseudotime <- CustomIterationClustersThird #for psudotime
 #Manual Curation of clusters: merge 16.0 and 16.1 both are FLP
 CustomIterationClustersThird[CustomIterationClustersThird == "16.1"] <- "16.0"
@@ -138,7 +139,7 @@ CustomIterationClustersThird[CustomIterationClustersThird=="2.0"] <- "0_2"
 save(CustomIterationClustersThird,file = "CustomIterationClusters3dit.rda")
 
 #Removing doublets previously analyzed for Pseudotime
-load("../DoubletAnalysis/doublets.rda")
+load("../8-DoubletAnalysis/doublets.rda")
 ClusterPseudotime <- ClusterPseudotime[!names(ClusterPseudotime) %in% doublets]
 
 #Clusters for Pseudotime
@@ -173,7 +174,7 @@ ClusterPseudotime <- ClusterPseudotime[ClusterPseudotime %in% c("3.0",
                                                                 "10.2",
                                                                 "56.0")]
 RawCountsPseudotime <- rawdata.neuronsALL[,names(ClusterPseudotime)]
-save(ClusterPseudotime,file = "../PseudoTime/ClusterPseudotime.rda")
-save(RawCountsPseudotime,file = "../PseudoTime/RawCountsPseudotime.rda")
+save(ClusterPseudotime,file = "../9-PseudoTime/lusterPseudotime.rda")
+save(RawCountsPseudotime,file = "../9-PseudoTime/RawCountsPseudotime.rda")
 
 
