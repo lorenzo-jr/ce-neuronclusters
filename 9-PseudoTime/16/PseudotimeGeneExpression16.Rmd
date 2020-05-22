@@ -192,10 +192,25 @@ plot_cells(cds_16, genes=c("mec-3", "egl-46", "dma-1", "lin-14"),
            cell_size = 0.5)
 ```
 
+```{r}
+# Plot a few genes
+plot_cells(cds_16, genes=c("mec-3", "egl-46", "F49H12.4", "ser-2"),
+           show_trajectory_graph=FALSE,
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           cell_size = 0.5)
+```
+
 #Clustering Genes by Pseudotemporal Expression Pattern
 ```{r}
 
-cds_16_lineage_cds <- cds_16[rowData(cds_16)$gene_short_name %in% c("Y48G10A.6","dma-1", "lin-14", "egl-46", "mec-3", "mec-10", "asic-1"),]
+cds_16_lineage_cds <- cds_16[rowData(cds_16)$gene_short_name %in% c("Y48G10A.6","dma-1", "lin-14", "egl-46"),]
+plot_genes_in_pseudotime(cds_16_lineage_cds,
+                         min_expr=0.05)
+```
+```{r}
+
+cds_16_lineage_cds <- cds_16[rowData(cds_16)$gene_short_name %in% c("mec-3", "mec-10", "asic-1","F49H12.4", "ser-2"),]
 plot_genes_in_pseudotime(cds_16_lineage_cds,
                          min_expr=0.05)
 ```

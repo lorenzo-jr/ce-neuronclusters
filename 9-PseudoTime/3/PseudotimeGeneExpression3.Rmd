@@ -107,6 +107,7 @@ print(cds@principal_graph_aux$UMAP$root_pr_nodes)
 ```{r}
 plot_cells(cds)
 ```
+
 ##Plot the pseudotime graph
 ```{r}
 plot_cells(cds,
@@ -115,6 +116,7 @@ plot_cells(cds,
            label_leaves=FALSE,
            label_branch_points=FALSE)
 ```
+
 ##Plot the pseudotime graph
 ```{r}
 plot_cells(cds,
@@ -124,6 +126,7 @@ plot_cells(cds,
            label_branch_points=FALSE, 
            graph_label_size=1.5)
 ```
+
 ##Plot the pseudotime graph without trajectory
 ```{r}
 plot_cells(cds,
