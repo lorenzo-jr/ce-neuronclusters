@@ -1,4 +1,4 @@
-# Seurat clustering and ploting scrpits used in the article "Combining single-cell RNA-sequencing with a molecular atlas unveils new markers for Caenorhabditis elegans neuron classes".
+# Clustering and ploting scrpits used in the article "Combining single-cell RNA-sequencing with a molecular atlas unveils new markers for Caenorhabditis elegans neuron classes".
 
 Authors: Ramiro Lorenzo, Michiho Onizuka,Matthieu Defrance, Patrick Laurent
 
